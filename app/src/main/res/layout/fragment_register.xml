@@ -104,7 +104,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnLogin_Register"
+            android:id="@+id/btn_Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"

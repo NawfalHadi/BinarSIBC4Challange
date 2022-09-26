@@ -39,7 +39,7 @@ class CreateNoteBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.btnBottomSheetCreateNoteId.setOnClickListener {
-            val newIdUser = 1
+            val newIdUser = 0
             context?.let { viewModel.setIdPreference(newIdUser) }
             listener?.onIdUserChanged()
             dismiss()
