@@ -3,6 +3,7 @@ package com.thatnawfal.binarsibc4challange.data.local.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 
 @Dao
@@ -12,5 +13,11 @@ interface NotesDao {
 
     @Insert
     suspend fun insertNotes(notes: NotesEntity): Long
+
+    @Update
+    suspend fun updateNotes(notes: NotesEntity) : Int
+
+    @Query("SELECT * FROM NOTES WHERE id = :id")
+    suspend fun getNotesWithId(id: Int): NotesEntity?
 
 }

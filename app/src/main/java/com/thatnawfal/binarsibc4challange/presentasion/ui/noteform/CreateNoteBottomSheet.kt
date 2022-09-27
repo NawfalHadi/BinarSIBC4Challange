@@ -14,17 +14,12 @@ import com.thatnawfal.binarsibc4challange.databinding.FragmentCreateNoteBottomSh
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
 import com.thatnawfal.binarsibc4challange.utills.viewModelFactory
 
-class CreateNoteBottomSheet : BottomSheetDialogFragment() {
+class CreateNoteBottomSheet(private var listener: OnChangeListenerCreate) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentCreateNoteBottomSheetBinding
-    private var listener: OnIdUserChangedListener? = null
 
     private val viewModel: CreateNoteViewModel by viewModelFactory {
         CreateNoteViewModel(ServiceLocator.provideLocalRepository(requireContext()))
-    }
-
-    fun setListener(listener: OnIdUserChangedListener){
-        this.listener = listener
     }
 
     override fun onCreateView(
@@ -108,10 +103,11 @@ class CreateNoteBottomSheet : BottomSheetDialogFragment() {
     private fun submitNoteForm(){
         if (formValidation()) {
             viewModel.makesNewNotes(getNotesFromForm())
+            listener.onNoteCreated()
         }
     }
 }
 
-interface OnIdUserChangedListener{
-    fun onIdUserChanged()
+interface OnChangeListenerCreate{
+    fun onNoteCreated()
 }

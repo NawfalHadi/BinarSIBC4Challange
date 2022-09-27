@@ -12,7 +12,6 @@ import com.thatnawfal.binarsibc4challange.R
 import com.thatnawfal.binarsibc4challange.databinding.FragmentLoginBinding
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
 import com.thatnawfal.binarsibc4challange.presentasion.ui.MainActivity
-import com.thatnawfal.binarsibc4challange.presentasion.ui.noteform.OnIdUserChangedListener
 import com.thatnawfal.binarsibc4challange.utills.viewModelFactory
 
 class LoginFragment : Fragment() {

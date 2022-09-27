@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class NotesViewModel(private val repository: LocalRepository): ViewModel() {
     val notesListResult = MutableLiveData<Resource<List<NotesEntity>>>()
+    val notesDetailResult = MutableLiveData<Resource<NotesEntity?>>()
 
     fun getNotesList(accountId: Int){
         viewModelScope.launch {
@@ -20,9 +21,19 @@ class NotesViewModel(private val repository: LocalRepository): ViewModel() {
         }
     }
 
+    fun getNotesById(id: Int){
+        viewModelScope.launch {
+            notesDetailResult.postValue(Resource.Loading())
+            delay(1000)
+            notesDetailResult.postValue(repository.getNotesById(id))
+        }
+    }
+
     fun getIdPreference(): Int? {
         return repository.getUserIdInPreference()
     }
 
-
+    fun setIdPreference(newId: Int){
+        repository.setUserIdInPreference(newId)
+    }
 }

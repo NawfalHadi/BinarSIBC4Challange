@@ -11,7 +11,6 @@ interface LocalRepository {
 
     // 1. CheckKalauIdAdalah != 0
     fun checkIfUserLogin(): Boolean
-    fun checkIfEmailAndPasswordCorrect(email: String, pass: String): Boolean
     fun setUserIdInPreference(newId: Int)
     fun getUserIdInPreference(): Int?
 
@@ -22,6 +21,8 @@ interface LocalRepository {
 
     suspend fun insertNewNotes(notes: NotesEntity): Resource<Number>
     suspend fun getAllNotesById(accountId: Int): Resource<List<NotesEntity>>
+    suspend fun updateNotes(notes: NotesEntity): Resource<Number>
+    suspend fun getNotesById(id: Int): Resource<NotesEntity?>
 }
 
 class LocalRepositoryImpl(
@@ -36,9 +37,6 @@ class LocalRepositoryImpl(
         return dataSource.getUserId() != 0
     }
 
-    override fun checkIfEmailAndPasswordCorrect(email: String, pass: String): Boolean {
-        TODO("Not yet implemented")
-    }
 
     override fun setUserIdInPreference(newId: Int) {
         dataSource.setUserId(newId)
@@ -80,6 +78,18 @@ class LocalRepositoryImpl(
     override suspend fun getAllNotesById(accountId: Int): Resource<List<NotesEntity>> {
         return proceed {
             notesDataSource.getAllNotesById(accountId)
+        }
+    }
+
+    override suspend fun updateNotes(notes: NotesEntity): Resource<Number> {
+        return proceed {
+            notesDataSource.updateNotes(notes)
+        }
+    }
+
+    override suspend fun getNotesById(id: Int): Resource<NotesEntity?> {
+        return proceed {
+            notesDataSource.getNotesById(id)
         }
     }
 

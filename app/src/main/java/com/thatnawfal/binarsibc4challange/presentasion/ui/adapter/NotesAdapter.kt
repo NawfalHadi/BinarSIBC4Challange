@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.ItemNotesBinding
+import com.thatnawfal.binarsibc4challange.presentasion.ui.ActionDialog
+import com.thatnawfal.binarsibc4challange.presentasion.ui.MainActivity
 
-class NotesAdapter(): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
+class NotesAdapter(
+    private val listener: itemClickListerner
+): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
     private lateinit var dataSet: List<NotesEntity>
 
     fun submitData(value: List<NotesEntity>) {
@@ -16,7 +20,7 @@ class NotesAdapter(): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesListViewHolder {
         val binding = ItemNotesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NotesListViewHolder(binding)
+        return NotesListViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: NotesListViewHolder, position: Int) {
@@ -27,7 +31,8 @@ class NotesAdapter(): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
     override fun getItemCount(): Int = dataSet.size
 
     class NotesListViewHolder(
-        private val binding: ItemNotesBinding
+        private val binding: ItemNotesBinding,
+        private val listener: itemClickListerner
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bindingView(note: NotesEntity) {
@@ -35,9 +40,19 @@ class NotesAdapter(): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
                 with(binding) {
                     tvItemNotesTitle.text = note.judul
                     tvItemNotesNote.text = note.catatan
+
+                    cvItemNotes.setOnClickListener {
+                        listener.onItemClicked()
+                    }
                 }
             }
         }
 
     }
 }
+
+interface itemClickListerner {
+    fun onItemClicked()
+}
+
+
