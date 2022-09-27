@@ -1,4 +1,4 @@
-package com.thatnawfal.binarsibc4challange.presentasion.ui.noteform
+package com.thatnawfal.binarsibc4challange.presentasion.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,19 +9,15 @@ import com.thatnawfal.binarsibc4challange.data.repository.LocalRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class CreateNoteViewModel(private val repository: LocalRepository): ViewModel() {
-    val newNotes = MutableLiveData<Resource<Number>>()
+class NotesViewModel(private val repository: LocalRepository): ViewModel() {
+    val notesListResult = MutableLiveData<Resource<List<NotesEntity>>>()
 
-    fun makesNewNotes(note: NotesEntity){
+    fun getNotesList(accountId: Int){
         viewModelScope.launch {
-            newNotes.postValue(Resource.Loading())
+            notesListResult.postValue(Resource.Loading())
             delay(1000)
-            newNotes.postValue(repository.insertNewNotes(note))
+            notesListResult.postValue(repository.getAllNotesById(accountId))
         }
-    }
-
-    fun setIdPreference(newId: Int){
-        repository.setUserIdInPreference(newId)
     }
 
     fun getIdPreference(): Int? {

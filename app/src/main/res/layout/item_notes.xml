@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvItem_notes_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/btnItem_notes_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:background="#00000000"
+            app:layout_constraintTop_toTopOf="@id/tvItem_notes_title"
+            app:layout_constraintBottom_toBottomOf="@id/tvItem_notes_title"
+            app:layout_constraintEnd_toStartOf="@id/btnItem_notes_delete"
+            android:layout_marginRight="16dp"
+            app:tint="@color/black" />
+
+        <ImageButton
+            android:id="@+id/btnItem_notes_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/tvItem_notes_title"
+            app:layout_constraintEnd_toEndOf="@id/tvItem_notes_note"
+            app:layout_constraintTop_toTopOf="@+id/tvItem_notes_title"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/tvItem_notes_note"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="lorem ipsum lorem dir solor de amet lorem ipsum lorem dir de amet lorem ipsum lorem dir solor de amet"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvItem_notes_title"
+            app:layout_constraintTop_toBottomOf="@id/tvItem_notes_title"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

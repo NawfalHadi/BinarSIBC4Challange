@@ -45,11 +45,16 @@ object ServiceLocator {
         return provideAppDatabase(context).notesDao()
     }
 
+    fun provideNotesDataSource(context: Context): NotesDataSource {
+        return NotesDataSourceImpl(provideNotesDao(context))
+    }
+
 
     fun provideLocalRepository(context: Context): LocalRepository {
         return LocalRepositoryImpl(
             provideAuthPreferenceDataSource(context),
-            provideAccountDataSource(context)
+            provideAccountDataSource(context),
+            provideNotesDataSource(context)
         )
     }
 }
