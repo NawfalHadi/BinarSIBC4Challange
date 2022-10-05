@@ -5,16 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.ItemNotesBinding
-import com.thatnawfal.binarsibc4challange.presentasion.ui.ActionDialog
-import com.thatnawfal.binarsibc4challange.presentasion.ui.MainActivity
 
 class NotesAdapter(
     private val listener: itemClickListerner
 ): RecyclerView.Adapter<NotesAdapter.NotesListViewHolder>() {
-    private lateinit var dataSet: List<NotesEntity>
+    private var dataSet: MutableList<NotesEntity> = mutableListOf()
 
-    fun submitData(value: List<NotesEntity>) {
-        dataSet = value
+    fun setData(value: List<NotesEntity>) {
+        clearData()
+        addData(value)
+        notifyDataSetChanged()
+    }
+
+    fun addData(value: List<NotesEntity>) {
+        this.dataSet.addAll(value)
+        notifyDataSetChanged()
+    }
+
+    fun clearData() {
+        this.dataSet.clear()
         notifyDataSetChanged()
     }
 
@@ -30,6 +39,7 @@ class NotesAdapter(
 
     override fun getItemCount(): Int = dataSet.size
 
+
     class NotesListViewHolder(
         private val binding: ItemNotesBinding,
         private val listener: itemClickListerner
@@ -42,7 +52,7 @@ class NotesAdapter(
                     tvItemNotesNote.text = note.catatan
 
                     cvItemNotes.setOnClickListener {
-                        listener.onItemClicked()
+                        listener.onItemClicked(note.id)
                     }
                 }
             }
@@ -52,7 +62,7 @@ class NotesAdapter(
 }
 
 interface itemClickListerner {
-    fun onItemClicked()
+    fun onItemClicked(id: Int)
 }
 
 

@@ -3,7 +3,6 @@ package com.thatnawfal.binarsibc4challange.presentasion.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -12,18 +11,16 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.mypassword.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.R
-import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.ActivityMainBinding
 
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
 import com.thatnawfal.binarsibc4challange.presentasion.ui.adapter.NotesAdapter
 import com.thatnawfal.binarsibc4challange.presentasion.ui.adapter.itemClickListerner
 import com.thatnawfal.binarsibc4challange.presentasion.ui.editnoteform.EditNoteBottomSheet
+import com.thatnawfal.binarsibc4challange.presentasion.ui.editnoteform.OnChangeListnerEdited
 import com.thatnawfal.binarsibc4challange.presentasion.ui.noteform.CreateNoteBottomSheet
-import com.thatnawfal.binarsibc4challange.presentasion.ui.noteform.CreateNoteViewModel
 import com.thatnawfal.binarsibc4challange.presentasion.ui.noteform.OnChangeListenerCreate
 import com.thatnawfal.binarsibc4challange.utills.viewModelFactory
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,10 +32,11 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter: NotesAdapter by lazy {
         NotesAdapter(object : itemClickListerner {
-            override fun onItemClicked() {
+            override fun onItemClicked(id: Int) {
                 ActionDialog(object : buttonClickListener {
                     override fun actionEdit() {
-                        showEditNoteForm()
+                        Toast.makeText(applicationContext, "edit button", Toast.LENGTH_LONG).show()
+                        viewModel.getNotesById(id)
                     }
 
                     override fun actionDelete() {
@@ -58,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         viewClickListener()
         observeAction()
 
+        showEditNoteForm()
+
     }
 
     private fun initList() {
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 is Resource.Success -> {
                     setLoadingState(false)
-                    it.payload?.let { list -> adapter.submitData(list) }
+                    it.payload?.let { list -> adapter.setData(list) }
                     initList()
                 }
                 is Resource.Error -> TODO()
@@ -105,27 +105,27 @@ class MainActivity : AppCompatActivity() {
                 override fun onNoteCreated() {
                     setData()
                 }
-
-            }).apply {
-//                null
-            }.show(supportFragmentManager, CreateNoteBottomSheet::class.java.simpleName)
+            }).show(supportFragmentManager, CreateNoteBottomSheet::class.java.simpleName)
         }
     }
 
     private fun showEditNoteForm(){
-        viewModel.getNotesById(viewModel.getIdPreference().toString().toInt())
         viewModel.notesDetailResult.observe(this){
             when (it) {
                 is Resource.Error -> TODO()
-                is Resource.Loading -> TODO()
+                is Resource.Loading -> {
+                    Toast.makeText(applicationContext, "Loading", Toast.LENGTH_LONG).show()
+                }
                 is Resource.Success -> {
                     val currentDialog =
                         supportFragmentManager.findFragmentByTag(EditNoteBottomSheet::class.java.simpleName)
                     if (currentDialog == null) {
                         it.payload?.let { note ->
-                            EditNoteBottomSheet(note).apply {
-                    //                null
-                            }.show(supportFragmentManager, CreateNoteBottomSheet::class.java.simpleName)
+                            EditNoteBottomSheet(note, object : OnChangeListnerEdited {
+                                override fun onNoteEdited() {
+                                    setData()
+                                }
+                            }).show(supportFragmentManager, CreateNoteBottomSheet::class.java.simpleName)
                         }
                     }
                 }

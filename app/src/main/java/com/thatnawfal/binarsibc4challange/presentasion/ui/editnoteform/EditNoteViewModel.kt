@@ -15,7 +15,7 @@ class EditNoteViewModel(private val repository: LocalRepository): ViewModel() {
     fun updateNotes(notes: NotesEntity) {
         viewModelScope.launch {
             updateResult.postValue(Resource.Loading())
-            delay(1000)
+            delay(500)
             updateResult.postValue(repository.updateNotes(notes))
         }
     }

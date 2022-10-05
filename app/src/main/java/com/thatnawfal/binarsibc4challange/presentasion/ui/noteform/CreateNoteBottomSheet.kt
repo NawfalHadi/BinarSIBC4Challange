@@ -33,9 +33,6 @@ class CreateNoteBottomSheet(private var listener: OnChangeListenerCreate) : Bott
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvBottomSheetCreateNoteId.text = context?.let {
-            viewModel.getIdPreference().toString()
-        }
 
         binding.btnBotSheetSubmit.setOnClickListener {
             submitNoteForm()

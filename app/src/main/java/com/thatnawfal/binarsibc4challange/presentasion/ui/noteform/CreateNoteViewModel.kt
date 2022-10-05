@@ -15,7 +15,7 @@ class CreateNoteViewModel(private val repository: LocalRepository): ViewModel() 
     fun makesNewNotes(note: NotesEntity){
         viewModelScope.launch {
             newNotes.postValue(Resource.Loading())
-            delay(1000)
+            delay(500)
             newNotes.postValue(repository.insertNewNotes(note))
         }
     }
