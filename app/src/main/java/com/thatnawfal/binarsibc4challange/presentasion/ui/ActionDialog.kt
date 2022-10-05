@@ -35,6 +35,7 @@ class ActionDialog(
             listener.actionEdit()
         }
         binding.btnActionDialogDelete.setOnClickListener {
+            dismiss()
             listener.actionDelete()
         }
     }

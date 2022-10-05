@@ -8,6 +8,7 @@ interface NotesDataSource {
     suspend fun getAllNotesById(accountId: Int): List<NotesEntity>
     suspend fun insertNewNotes(notes: NotesEntity): Long
     suspend fun updateNotes(notes: NotesEntity): Int
+    suspend fun deleteNotes(notes: NotesEntity): Int
     suspend fun getNotesById(id: Int): NotesEntity?
 }
 
@@ -22,6 +23,10 @@ class NotesDataSourceImpl(private var notesDao: NotesDao): NotesDataSource {
 
     override suspend fun updateNotes(notes: NotesEntity): Int {
         return notesDao.updateNotes(notes)
+    }
+
+    override suspend fun deleteNotes(notes: NotesEntity): Int {
+        return notesDao.deleteNotes(notes)
     }
 
     override suspend fun getNotesById(id: Int): NotesEntity? {

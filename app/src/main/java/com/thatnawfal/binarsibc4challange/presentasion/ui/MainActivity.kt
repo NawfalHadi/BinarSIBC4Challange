@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.mypassword.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.R
+import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.ActivityMainBinding
 
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
@@ -32,15 +33,15 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter: NotesAdapter by lazy {
         NotesAdapter(object : itemClickListerner {
-            override fun onItemClicked(id: Int) {
+            override fun onItemClicked(note: NotesEntity) {
                 ActionDialog(object : buttonClickListener {
                     override fun actionEdit() {
-                        Toast.makeText(applicationContext, "edit button", Toast.LENGTH_LONG).show()
-                        viewModel.getNotesById(id)
+                        viewModel.getNotesById(note.id)
                     }
 
                     override fun actionDelete() {
-                        TODO("Not yet implemented")
+                        viewModel.deleteNotes(note)
+                        setData()
                     }
 
                 }).show(supportFragmentManager, "action dialog")
@@ -79,6 +80,17 @@ class MainActivity : AppCompatActivity() {
                     initList()
                 }
                 is Resource.Error -> TODO()
+            }
+        }
+
+        viewModel.deleteResult.observe(this) {
+            when (it) {
+                is Resource.Error ->
+                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
+                is Resource.Loading ->
+                    Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
+                is Resource.Success ->
+                    Toast.makeText(applicationContext, "Notes Deleted", Toast.LENGTH_LONG).show()
             }
         }
     }

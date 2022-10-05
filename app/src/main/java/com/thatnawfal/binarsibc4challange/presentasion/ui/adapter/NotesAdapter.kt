@@ -52,7 +52,7 @@ class NotesAdapter(
                     tvItemNotesNote.text = note.catatan
 
                     cvItemNotes.setOnClickListener {
-                        listener.onItemClicked(note.id)
+                        listener.onItemClicked(note)
                     }
                 }
             }
@@ -62,7 +62,7 @@ class NotesAdapter(
 }
 
 interface itemClickListerner {
-    fun onItemClicked(id: Int)
+    fun onItemClicked(id: NotesEntity)
 }
 
 

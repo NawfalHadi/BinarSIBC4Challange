@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class EditNoteViewModel(private val repository: LocalRepository): ViewModel() {
     val updateResult = MutableLiveData<Resource<Number>>()
 
+
     fun updateNotes(notes: NotesEntity) {
         viewModelScope.launch {
             updateResult.postValue(Resource.Loading())
@@ -19,4 +20,6 @@ class EditNoteViewModel(private val repository: LocalRepository): ViewModel() {
             updateResult.postValue(repository.updateNotes(notes))
         }
     }
+
+
 }

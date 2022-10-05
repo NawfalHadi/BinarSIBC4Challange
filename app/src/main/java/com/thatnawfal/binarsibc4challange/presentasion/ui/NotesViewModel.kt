@@ -12,6 +12,9 @@ import kotlinx.coroutines.launch
 class NotesViewModel(private val repository: LocalRepository): ViewModel() {
     val notesListResult = MutableLiveData<Resource<List<NotesEntity>>>()
     val notesDetailResult = MutableLiveData<Resource<NotesEntity?>>()
+    val deleteResult = MutableLiveData<Resource<Number>>()
+
+
 
     fun getNotesList(accountId: Int){
         viewModelScope.launch {
@@ -26,6 +29,14 @@ class NotesViewModel(private val repository: LocalRepository): ViewModel() {
             notesDetailResult.postValue(Resource.Loading())
             delay(1000)
             notesDetailResult.postValue(repository.getNotesById(id))
+        }
+    }
+
+    fun deleteNotes(notes: NotesEntity) {
+        viewModelScope.launch {
+            deleteResult.postValue(Resource.Loading())
+            delay(500)
+            deleteResult.postValue(repository.deleteNotes(notes))
         }
     }
 

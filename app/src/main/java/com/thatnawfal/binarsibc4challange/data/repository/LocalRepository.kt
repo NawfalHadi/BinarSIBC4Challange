@@ -22,6 +22,7 @@ interface LocalRepository {
     suspend fun insertNewNotes(notes: NotesEntity): Resource<Number>
     suspend fun getAllNotesById(accountId: Int): Resource<List<NotesEntity>>
     suspend fun updateNotes(notes: NotesEntity): Resource<Number>
+    suspend fun deleteNotes(notes: NotesEntity): Resource<Number>
     suspend fun getNotesById(id: Int): Resource<NotesEntity?>
 }
 
@@ -84,6 +85,12 @@ class LocalRepositoryImpl(
     override suspend fun updateNotes(notes: NotesEntity): Resource<Number> {
         return proceed {
             notesDataSource.updateNotes(notes)
+        }
+    }
+
+    override suspend fun deleteNotes(notes: NotesEntity): Resource<Number> {
+        return proceed {
+            notesDataSource.deleteNotes(notes)
         }
     }
 

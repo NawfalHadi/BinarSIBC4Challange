@@ -22,29 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageButton
-            android:id="@+id/btnItem_notes_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            android:background="#00000000"
-            app:layout_constraintTop_toTopOf="@id/tvItem_notes_title"
-            app:layout_constraintBottom_toBottomOf="@id/tvItem_notes_title"
-            app:layout_constraintEnd_toStartOf="@id/btnItem_notes_delete"
-            android:layout_marginRight="16dp"
-            app:tint="@color/black" />
-
-        <ImageButton
-            android:id="@+id/btnItem_notes_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:src="@drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="@+id/tvItem_notes_title"
-            app:layout_constraintEnd_toEndOf="@id/tvItem_notes_note"
-            app:layout_constraintTop_toTopOf="@+id/tvItem_notes_title"
-            app:tint="@color/black" />
-
         <TextView
             android:id="@+id/tvItem_notes_note"
             android:layout_width="0dp"
