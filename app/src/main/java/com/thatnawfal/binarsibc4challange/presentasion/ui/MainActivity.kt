@@ -9,7 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.catnip.mypassword.wrapper.Resource
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.R
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.ActivityMainBinding

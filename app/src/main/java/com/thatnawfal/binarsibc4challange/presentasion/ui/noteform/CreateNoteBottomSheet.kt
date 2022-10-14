@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
-import com.catnip.mypassword.wrapper.Resource
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.thatnawfal.binarsibc4challange.R
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.FragmentCreateNoteBottomSheetBinding
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator

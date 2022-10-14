@@ -3,7 +3,7 @@ package com.thatnawfal.binarsibc4challange.presentasion.ui.editnoteform
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catnip.mypassword.wrapper.Resource
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.data.repository.LocalRepository
 import kotlinx.coroutines.delay

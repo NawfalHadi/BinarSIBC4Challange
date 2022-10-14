@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.catnip.mypassword.wrapper.Resource
-import com.thatnawfal.binarsibc4challange.R
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.AccountEntity
 import com.thatnawfal.binarsibc4challange.databinding.FragmentRegisterBinding
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
@@ -52,7 +51,7 @@ class RegisterFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "Success Creating Your Account", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+
                 }
             }
         }

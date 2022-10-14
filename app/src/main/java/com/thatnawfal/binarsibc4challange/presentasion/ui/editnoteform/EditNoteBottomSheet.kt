@@ -1,18 +1,15 @@
 package com.thatnawfal.binarsibc4challange.presentasion.ui.editnoteform
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.catnip.mypassword.wrapper.Resource
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.thatnawfal.binarsibc4challange.R
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.databinding.FragmentEditNoteBottomSheetBinding
 import com.thatnawfal.binarsibc4challange.di.ServiceLocator
-import com.thatnawfal.binarsibc4challange.presentasion.ui.noteform.CreateNoteViewModel
 import com.thatnawfal.binarsibc4challange.utills.viewModelFactory
 
 class EditNoteBottomSheet(private val notes: NotesEntity, private var listener: OnChangeListnerEdited) : BottomSheetDialogFragment() {

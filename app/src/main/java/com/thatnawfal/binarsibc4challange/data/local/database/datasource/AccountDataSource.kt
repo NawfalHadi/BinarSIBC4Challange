@@ -5,7 +5,6 @@ import com.thatnawfal.binarsibc4challange.data.local.database.entity.AccountEnti
 
 interface AccountDataSource {
     suspend fun getIdFromEmail(email: String): Int
-
     suspend fun checkEmailExcist(email: String): Boolean
     suspend fun registerAccount(account: AccountEntity): Long
     suspend fun checkPassword(email: String, password: String): Boolean

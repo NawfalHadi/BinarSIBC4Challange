@@ -1,6 +1,6 @@
 package com.thatnawfal.binarsibc4challange.data.repository
 
-import com.catnip.mypassword.wrapper.Resource
+import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.data.local.database.datasource.AccountDataSource
 import com.thatnawfal.binarsibc4challange.data.local.database.datasource.NotesDataSource
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.AccountEntity
