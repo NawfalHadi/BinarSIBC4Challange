@@ -8,6 +8,7 @@ interface AccountDataSource {
     suspend fun checkEmailExcist(email: String): Boolean
     suspend fun registerAccount(account: AccountEntity): Long
     suspend fun checkPassword(email: String, password: String): Boolean
+    suspend fun getDataUser(id: Int): AccountEntity
 
 }
 
@@ -26,6 +27,10 @@ class AccountDataSourceImpl(private var accountDao: AccountDao): AccountDataSour
 
     override suspend fun checkPassword(email: String, password: String): Boolean {
         return accountDao.passwordIsCorrect(email, password) > 0
+    }
+
+    override suspend fun getDataUser(id: Int): AccountEntity {
+        return accountDao.getDataUser(id)
     }
 
 }

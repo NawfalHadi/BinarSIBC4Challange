@@ -3,9 +3,11 @@ package com.thatnawfal.binarsibc4challange.presentasion.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thatnawfal.binarsibc4challange.data.local.database.entity.AccountEntity
 import com.thatnawfal.binarsibc4challange.wrapper.Resource
 import com.thatnawfal.binarsibc4challange.data.local.database.entity.NotesEntity
 import com.thatnawfal.binarsibc4challange.data.repository.LocalRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -13,8 +15,15 @@ class NotesViewModel(private val repository: LocalRepository): ViewModel() {
     val notesListResult = MutableLiveData<Resource<List<NotesEntity>>>()
     val notesDetailResult = MutableLiveData<Resource<NotesEntity?>>()
     val deleteResult = MutableLiveData<Resource<Number>>()
+    val userDetailResult = MutableLiveData<Resource<AccountEntity>>()
 
-
+    fun getDataUser(id: Int){
+        viewModelScope.launch {
+            userDetailResult.postValue(Resource.Loading())
+            val account = repository.getDataUser(id)
+            userDetailResult.postValue(account)
+        }
+    }
 
     fun getNotesList(accountId: Int){
         viewModelScope.launch {

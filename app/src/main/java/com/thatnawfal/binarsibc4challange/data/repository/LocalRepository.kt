@@ -15,6 +15,7 @@ interface LocalRepository {
     fun getUserIdInPreference(): Int?
 
     suspend fun getIdFromEmail(email: String): Int
+    suspend fun getDataUser(id: Int): Resource<AccountEntity>
     suspend fun registerAccount(account: AccountEntity): Resource<Number>
     suspend fun isEmailExcist(email: String): Boolean
     suspend fun isPassCorrect(email: String, password: String): Boolean
@@ -51,6 +52,12 @@ class LocalRepositoryImpl(
 
     override suspend fun getIdFromEmail(email: String): Int {
         return accountDataSource.getIdFromEmail(email)
+    }
+
+    override suspend fun getDataUser(id: Int): Resource<AccountEntity> {
+        return proceed {
+            accountDataSource.getDataUser(id)
+        }
     }
 
     override suspend fun registerAccount(account: AccountEntity): Resource<Number> {
