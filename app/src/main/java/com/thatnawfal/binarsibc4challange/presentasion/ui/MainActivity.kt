@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                         setData()
                     }
 
-                }).show(supportFragmentManager, "action dialog")
+                }).show(supportFragmentManager, "action dialogs")
             }
         })
     }
